@@ -124,7 +124,7 @@ int main(int argc, char* argv[])
             if(FD_ISSET(sd, &readfds))
             {
                 memset(buffer, 0, 8192);
-                int bytesRecieved = recv(sd, buffer, 8102, 0);
+                int bytesRecieved = recv(sd, buffer, 8192, 0);
                 if(bytesRecieved == -1)
                 {
                     std::cerr << "Error in recv(). Quitting" << std::endl;
@@ -143,13 +143,14 @@ int main(int argc, char* argv[])
                     {
                         std::cout << " Client[" << i << "]:" << std::string(buffer, 0, bytesRecieved) << std::endl;
                     }
-                }
-                for(i = 0; i < max_clients; i++)
-                {
-                    sd = clientSocket[i];
-                    if(sd != 0)
+
+                    for(i = 0; i < max_clients; i++)
                     {
-                        send(sd, buffer, strlen(buffer), 0);
+                        sd = clientSocket[i];
+                        if(sd != 0)
+                        {
+                            send(sd, buffer, strlen(buffer), 0);
+                        }
                     }
                 }
             }
