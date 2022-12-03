@@ -1,4 +1,4 @@
-import server
+
 import os
 
 LAUNCHSTATE = 0
