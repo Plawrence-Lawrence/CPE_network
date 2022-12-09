@@ -1,14 +1,18 @@
 
 import os
-
+import clientStates
+import serverStates
+import socket
 LAUNCHSTATE = 0
 STARTSTATE = 1
 QUITSTATE = 2
 CREATESTATE = 3
 JOINSTATE = 4
 SERVERRUNSTATE = 5
-LOBBYOPTIONSSTATE = 6
-EXITSTATE = 7
+CLIENTRUNSTATE = 6
+LOBBYOPTIONSSTATE = 7
+EXITSTATE = 8
+
 def launchState():
     print("|---------------------|")
     print("|   - Welcome To -    |")
@@ -100,9 +104,10 @@ def lobbyOptionsState(currentPlayers, currentScore):
         os.system('cls' if os.name == 'nt' else 'clear')
         return CREATESTATE, currentPlayers, currentScore
     elif Choice == '3':
-        return QUITSTATE
+        return QUITSTATE, 0, 0
     
     return LOBBYOPTIONSSTATE, currentPlayers, currentScore
+
 def joinState():
 
     print("|----------------------------------|")
@@ -117,7 +122,7 @@ def joinState():
     print("|----------------------------------|")
     print("                               ")
     if Choice == '1':
-        return JOINSTATE
+        return CLIENTRUNSTATE, "F", -1
     elif Choice == '2':
         os.system('cls' if os.name == 'nt' else 'clear')
         print("|----------------------------------|")
@@ -131,7 +136,7 @@ def joinState():
         port = input("               > ") 
         print("|----------------------------------|")
         print("                               ")
-        return JOINSTATE
+        return CLIENTRUNSTATE, ipa, port
     elif Choice == '3':
         return STARTSTATE
     elif Choice == '4':
@@ -151,12 +156,21 @@ def quitState():
     print("|-------------------------------|")
     
     return EXITSTATE
+def serverRunState(players, score):
+    serverStates.runServerStateMachine(players, score)
+    return CREATESTATE
+def clientRunState(ip, port):
+    clientStates.clientStateMachine(ip, port)
+    return JOINSTATE
 
-def stateMachine(state, p, s):
+def stateMachine(state, p, s, r):
     os.system('cls' if os.name == 'nt' else 'clear')
     players = p
     score = s
     returnState = state
+    isRunning = r
+    ip = ""
+    port = 0
     if state == LAUNCHSTATE:
         returnState = launchState()
     elif state == STARTSTATE:
@@ -164,22 +178,17 @@ def stateMachine(state, p, s):
     elif state == CREATESTATE:
         returnState = createState()
     elif state == LOBBYOPTIONSSTATE:
-        state, players, score = lobbyOptionsState(players, score)
-        returnState = state
+        returnState, players, score = lobbyOptionsState(players, score)
+    elif state == SERVERRUNSTATE:
+        returnState = serverRunState(players, score)
+    elif state == CLIENTRUNSTATE:
+        returnState = clientRunState(ip, port)
     elif state == JOINSTATE:
-        returnState = joinState()
+        returnState, ip, port = joinState()
     elif state == QUITSTATE:
         returnState = quitState()
     elif state == EXITSTATE:
-        returnState = EXITSTATE()
+        returnState = EXITSTATE
 
-    return returnState, players, score
-
-State = LAUNCHSTATE
-while State != EXITSTATE:
-    
-    os.system('cls' if os.name == 'nt' else 'clear')
-    players = 2
-    score = 3
-    State, players, score = stateMachine(State, players, score)
+    return returnState, players, score, isRunning
 
