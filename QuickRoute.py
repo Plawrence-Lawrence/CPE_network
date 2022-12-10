@@ -8,7 +8,7 @@ print("Server started!")
 State = gameStateManager.LAUNCHSTATE
 isRunning = False
 players = 2
-score = 3
+score = 1
 print("Server started!")
 #server_socket = server.openServerSocket(p)
 

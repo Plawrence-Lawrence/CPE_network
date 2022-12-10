@@ -38,7 +38,7 @@ def startState():
     print("|           QuickRoute          |")
     print("|                               |")
     print("|              Enter            |")
-    print("| Create Game(1)   Join Game(2) |")
+    print("|  Host Game (1)   Join Game(2) |")
     print("|             Quit(3)           |")
     print("|                               |")
     Choice = input("               > ") 
@@ -55,22 +55,25 @@ def startState():
     return STARTSTATE
 
 def createState():
-    print("|--------------------------------|")
-    print("|                                |")
-    print("|           QuickRoute           |")
-    print("|          Creating Game         |")
-    print("|                                |")
-    print("|    Start(1)   Lobby Options(2) |")
-    print("|             Quit(3)            |")
-    print("|                                |")
-    Choice = input("                > ") 
-    print("|--------------------------------|")
-    print("                               ")
+    print("|-----------------------------------------|")
+    print("|                                         |")
+    print("|              QuickRoute                 |")
+    print("|             Creating Game               |")
+    print("|                                         |")
+    print("|   Note: Host does not count as player   |")
+    print("|                                         |")
+    print("|        Start(1)   Lobby Options(2)      |")
+    print("|         Back(3)       Quit(3)           |")
+    print("|                                         |")
+    Choice = input("                   > ") 
+    print("|-----------------------------------------|")
     if Choice == '1':
         return SERVERRUNSTATE
     elif Choice == '2':
         return LOBBYOPTIONSSTATE
     elif Choice == '3':
+        return STARTSTATE
+    elif Choice == '4':
         return QUITSTATE
     return CREATESTATE
 
@@ -181,8 +184,10 @@ def stateMachine(state, p, s, r):
         returnState, players, score = lobbyOptionsState(players, score)
     elif state == SERVERRUNSTATE:
         returnState = serverRunState(players, score)
+        returnState = CREATESTATE
     elif state == CLIENTRUNSTATE:
-        returnState = clientRunState(ip, port)
+        clientRunState(ip, port)
+        returnState = STARTSTATE
     elif state == JOINSTATE:
         returnState, ip, port = joinState()
     elif state == QUITSTATE:

@@ -41,4 +41,3 @@ def openHostSocket(queuSize, port):
     # This makes server listen to new connections
     server_socket.listen(queuSize)
     return server_socket
-# Handles message receiving
