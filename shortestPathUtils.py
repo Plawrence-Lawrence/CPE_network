@@ -39,9 +39,9 @@ class Graph():
             # Update dist value of the adjacent vertices of the picked vertex only if the current distance is greater than new distance and the vertex in not in the shortest path tree
             for v in range(self.V):
                 if (self.graph[u][v] > 0 and sptSet[v] == False and dist[v] > dist[u] + self.graph[u][v]):
-                    dist[v] = dist[u] + self.graph[u][v]
+                    dist[v] = dist[u] + self.graph[u][v] #Stores the current distance with the newly added distance
  
-        return dist[end]
+        return dist[end] #returns the distance from the start node to the end node
 
 def genGraph(choice):
     node = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]
@@ -106,6 +106,7 @@ def genGraph(choice):
 def createMatrix(choice):
     if choice == 1:
         #Makes an array that stores 1 if there is a connection between nodes and 0 if there isn't
+        #The matrix has indexes 0-12, these indexes correspond to the Nodes A-M respectively
         Matrix = [[0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
                   [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
                   [0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
@@ -135,6 +136,7 @@ def createMatrix(choice):
         return Matrix
     if choice == 2:
         #Makes an array that stores 1 if there is a connection between nodes and 0 if there isn't
+        #The matrix has indexes 0-3, these indexes correspond to the nodes A-D respectively
         Matrix = [[0, 1, 1, 0],
                   [1, 0, 0, 1],
                   [1, 0, 0, 1],
@@ -154,6 +156,7 @@ def createMatrix(choice):
         return Matrix
     if choice == 3:
         #Makes an array that stores 1 if there is a connection between nodes and 0 if there isn't
+        #The matrix has indexes 0-6, these indexes correspond to the nodes A-G respectively
         Matrix = [[0, 1, 0, 0, 0, 0, 0],
                   [1, 0, 1, 1, 0, 0, 0],
                   [0, 1, 0, 1, 0, 0, 0],
@@ -176,6 +179,7 @@ def createMatrix(choice):
         return Matrix
     if choice == 4:
         #Makes an array that stores 1 if there is a connection between nodes and 0 if there isn't
+        #The matrix has indexes 0-5, these indexes correspond to the nodes A-F respectively
         Matrix = [[0, 0, 1, 0, 1, 0],
                   [0, 0, 1, 1, 0, 0],
                   [1, 1, 0, 1, 1, 1],
@@ -199,23 +203,7 @@ def createMatrix(choice):
 #Makes a graph based on the adj matrix and the graph choice
 def storeDecision(choice, Matrix):
     if choice == 1:
-        #print("                                                            \n")
-        #print("                 A--------------------B--------------------C\n")
-        #print("                /|\                   |                   /|\\n")
-        #print("               / | \                  |                  / | \\n")
-        #print("              /  |  \                 |                 /  |  \\n")
-        #print("             /   |   \                |                /   |   \\n")
-        #print("            /    |    \               |               /    |    \\n")
-        #print("           /     |     \              |              /     |     \\n")
-        #print("          D------E------F             G             H------I------J\n")
-        #print("           \     |     /              |              \     |     /\n")
-        #print("            \    |    /               |               \    |    /\n")
-        #print("             \   |   /                |                \   |   /\n")
-        #print("              \  |  /                 |                 \  |  /\n")
-        #print("               \ | /                  |                  \ | /\n")
-        #print("                \|/                   |                   \|/\n")
-        #print("                 K--------------------L--------------------M")
-        #print("                                                                \n")
+        #Develops a 13 node array of strings that store a graph with the distance based off the adjacency matrix
         graphArray = ["                 " + str(Matrix[0][1])  + "                      " + str(Matrix[1][2]) + "              ",
                       "       A--------------------B--------------------C",
                       "      /|\                   |                   /|\\",
@@ -235,19 +223,7 @@ def storeDecision(choice, Matrix):
                       "                  "+str(Matrix[10][11])+"                    "+str(Matrix[11][12])+"         "]
         return graphArray
     elif choice == 2:
-        #print("                A                \n")
-        #print("               / \               \n")
-        #print("              /   \              \n")
-        #print("             /     \             \n")
-        #print("            /       \            \n")
-        #print("           /         \           \n")
-        #print("          B           C          \n")
-        #print("           \         /           \n")
-        #print("            \       /            \n")
-        #print("             \     /             \n")
-        #print("              \   /              \n")
-        #print("               \ /               \n")
-        #print("                D                \n")
+        #Develops a 4 node array of strings that store a graph with the distance based off the adjacency matrix
         graphArray = ["                A                \n", 
                       "               / \               \n", 
                       "              /   \              \n", 
@@ -262,27 +238,7 @@ def storeDecision(choice, Matrix):
                       "                D                \n"]
         return graphArray
     elif choice == 3:
-        #print("A\n")
-        #print(" \\n")
-        #print("  \\n")
-        #print("   \\n")
-        #print("    B-----------C \n")
-        #print("     \         / \n")
-        #print("      \       / \n")
-        #print("       \     / \n")
-        #print("        \   / \n")
-        #print("         \ / \n")
-        #print("          D \n")
-        #print("         / \ \n")
-        #print("        /   \ \n")
-        #print("       /     \ \n")
-        #print("      /       \ \n")
-        #print("     /         \ \n")
-        #print("    E-----------F \n")
-        #print("                 \ \n")
-        #print("                  \ \n")
-        #print("                   \ \n")
-        #print("                    G \n")
+        #Develops a 7 node array of strings that store a graph with the the distance based off the adjacency matrix
         graphArray = ["A",
                       " \\",
                       " "+str(Matrix[0][1])+"\\",
@@ -306,21 +262,7 @@ def storeDecision(choice, Matrix):
                       "                    G "]
         return graphArray
     else:
-        #print("A             B \n")
-        #print("|\           / \ \n")
-        #print("| \         /   \ \n")
-        #print("|  \       /     \ \n")
-        #print("|   \     /       \ \n")
-        #print("|    \   /         \ \n")
-        #print("|     \ /           \ \n")
-        #print("|      C-------------D \n")
-        #print("|     / \           / \n")
-        #print("|    /   \         / \n")
-        #print("|   /     \       / \n")
-        #print("|  /       \     / \n")
-        #print("| /         \   / \n")
-        #print("|/           \ / \n")
-        #print("E             F \n")
+        #Develops an array of strings that have the 6 node graph with all the distances from the adjacency matrix
         graphArray = [" A             B ",
                       " |\           / \ ",
                       " | \         /   \ ",
