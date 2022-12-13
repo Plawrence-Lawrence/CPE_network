@@ -19,10 +19,10 @@ class Graph():
         min = 1e7
  
         # Search not nearest vertex not in the shortest path tree
-        for v in range(self.V):
-            if dist[v] < min and sptSet[v] == False:
-                min = dist[v]
-                min_index = v
+        for i in range(self.V):
+            if dist[i] < min and sptSet[i] == False:
+                min = dist[i]
+                min_index = i
  
         return min_index
  
@@ -36,15 +36,15 @@ class Graph():
         for cout in range(self.V):
  
             # Pick the minimum distance vertex from the set of vertices not yet processed. u is always equal to src in first iteration
-            u = self.minDistance(dist, sptSet)
+            node1 = self.minDistance(dist, sptSet)
  
             # Put the minimum distance vertex in the shortest path tree
-            sptSet[u] = True
+            sptSet[node1] = True
  
             # Update dist value of the adjacent vertices of the picked vertex only if the current distance is greater than new distance and the vertex in not in the shortest path tree
-            for v in range(self.V):
-                if (self.graph[u][v] > 0 and sptSet[v] == False and dist[v] > dist[u] + self.graph[u][v]):
-                    dist[v] = dist[u] + self.graph[u][v] #Stores the current distance with the newly added distance
+            for node2 in range(self.V):
+                if (self.graph[node1][node2] > 0 and sptSet[node2] == False and dist[node2] > dist[node1] + self.graph[node1][node2]):
+                    dist[node2] = dist[node1] + self.graph[node1][node2] #Stores the current distance with the newly added distance
  
         return dist[end] #returns the distance from the start node to the end node
 
