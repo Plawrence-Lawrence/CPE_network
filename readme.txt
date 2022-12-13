@@ -8,3 +8,4 @@ hosting simply manages the game.
 
 By default it requires two clients with win condition of 3 rounds
 
+If playing on a single machines, open multiple terminals
