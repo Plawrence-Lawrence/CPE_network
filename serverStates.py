@@ -111,7 +111,7 @@ def serverLobbyState(server_socket, maxPlayers, client_list, currentPlayers, soc
 							if playersJoined == maxPlayers:
 								
 								#Multicast and tell all sockets that the match is about to start
-								netmsg.send_to_all(server_socket, "SVR TXT \nThe match starts in 10 seconds. Answer first to win!\n ", client_list)
+								netmsg.send_to_all(server_socket, "SVR TXT \nThe match starts in 10 seconds. \nFind the shortest distance between two nodes in a routing graph. \nAnswer first to win!\n ", client_list)
 
 								#All players joined so change to main game loop running state
 								outState = RUNNINGSTATE
@@ -263,7 +263,7 @@ def gameOverState(server_socket, client_list, roundWinInfo_dic,errorOccured):
 		GO_msg += "\n|-------------------------------------|"
 		GO_msg += "\n|             Quick Route             |"
 		GO_msg += "\n|                                     |"
-		GO_msg +=  "\n      Player: " + roundWinInfo_dic["name"] + " has won this match!"
+		GO_msg +=  "\n*      Player: " + roundWinInfo_dic["name"] + " has won this match!      *"
 		GO_msg += "\n|                                     |"
 		GO_msg += "\n|     Disconnecting in 5 seconds      |"
 		GO_msg += "\n|-------------------------------------| "

@@ -1,3 +1,8 @@
+#Author: Richard Cao
+#Date: 12/12/2022
+#Purpose: The purpose of this file is to create functionality, enabling a program to create one of four premade network routing graphs, Randomly generate the distances 
+#between nodes in said routing graphuse, and then Dijkstra's algorithm to find the path between two randomly selected nodes in the routing graph. Functionality
+#Is meant to be returned as function calls elsewhere 
 import random
 
 class Graph():
@@ -47,60 +52,60 @@ def genGraph(choice):
     node = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]
     if choice == 1:
         #Makes a matrix if the selection is the first graph
-        start = random.randint(0,12) #Generates the starting number from 0-12
-        startNode = node[start] #Stores the starting node based off of the starting number
-        end = random.randint(0,12) #Generates the ending number from 0-12
-        while start == end: #Checks to see if the start is the same as the end
-            end = random.randint(0,12) #If it is the same then it finds a new number
-        endNode = node[end] #Stores the ending node based off of the ending number
-        adjMatrix = createMatrix(choice) #Makes the adjacency Matrix
-        g = Graph(13) #Makes a graph of 13 Nodes
-        g.graph = adjMatrix #Sets the adjacency matrix of the graph to the randomly made adjacency matrix
-        SPD =g.dijkstra(start, end) #Runs the algorithm to find the shortest distance from one node to another
-        graph = storeDecision(choice, adjMatrix) #Stores the graph in a string so that it will print in the terminal
-        return startNode, endNode, graph, str(SPD) #returns all the variables to send to the client
+        start = random.randint(0,12)         #Generates the starting number from 0-12
+        startNode = node[start]              #Stores the starting node based off of the starting number
+        end = random.randint(0,12)           #Generates the ending number from 0-12
+        while start == end:                  #Checks to see if the start is the same as the end
+            end = random.randint(0,12)       #If it is the same then it finds a new number
+        endNode = node[end]                  #Stores the ending node based off of the ending number
+        adjMatrix = createMatrix(choice)     #Makes the adjacency Matrix
+        g = Graph(13)                        #Makes a graph of 13 Nodes
+        g.graph = adjMatrix                  #Sets the adjacency matrix of the graph to the randomly made adjacency matrix
+        SPD =g.dijkstra(start, end)                 #Runs the algorithm to find the shortest distance from one node to another
+        graph = storeDecision(choice, adjMatrix)    #Stores the graph in a string so that it will print in the terminal
+        return startNode, endNode, graph, str(SPD)  #returns all the variables to send to the client
     if choice == 2:
         #Makes a matrix if the selection is the second graph
-        start = random.randint(0,3) #Gernerates the starting number from 0-3
-        startNode = node[start] #Stores the starting node based on the starting number
-        end = random.randint(0,3) #Generates the end number from 0-3
-        while start == end: #Checks to make sure that the starting number isn't the same as the ending number
-            end = random.randint(0,3) #Regenerates a random number from 0-3 to make sure the ending number is different
-        endNode = node[end] #Stores the ending node based on the end number
+        start = random.randint(0,3)      #Gernerates the starting number from 0-3
+        startNode = node[start]          #Stores the starting node based on the starting number
+        end = random.randint(0,3)        #Generates the end number from 0-3
+        while start == end:              #Checks to make sure that the starting number isn't the same as the ending number
+            end = random.randint(0,3)    #Regenerates a random number from 0-3 to make sure the ending number is different
+        endNode = node[end]              #Stores the ending node based on the end number
         adjMatrix = createMatrix(choice) #Makes the adhjacency matrix
-        g = Graph(4) #Makes a graph of 4 nodes
-        g.graph = adjMatrix #Sets the graph adjacency matrix to the randomly made adjacency matrix
-        SPD = g.dijkstra(start, end) #Runs the algorithm to find the shortest distance from the start node to end node
-        graph = storeDecision(choice, adjMatrix) #Stores the graph in a string so that it will print in the terminal
+        g = Graph(4)                     #Makes a graph of 4 nodes
+        g.graph = adjMatrix              #Sets the graph adjacency matrix to the randomly made adjacency matrix
+        SPD = g.dijkstra(start, end)               #Runs the algorithm to find the shortest distance from the start node to end node
+        graph = storeDecision(choice, adjMatrix)   #Stores the graph in a string so that it will print in the terminal
         return startNode, endNode, graph, str(SPD) #returns all the variables to send to the client
     if choice == 3:
         #Makes a matrix if the selection is the third graph
-        start = random.randint(0,6) #Gernerates the starting number from 0-6
-        startNode = node[start] #Stores the starting node based on the starting number
-        end = random.randint(0,6) #Generates the end number from 0-6
-        while start == end: #Checks to make sure that the starting number isn't the same as the ending number
-            end = random.randint(0,6) #Regenerates a random number from 0-6 to make sure the ending number is different
-        endNode = node[end] #Stores the ending node based on the end number
-        adjMatrix = createMatrix(choice) #Makes the adhjacency matrix
-        g = Graph(7) #Makes a graph of 7 nodes
-        g.graph = adjMatrix #Sets the graph adjacency matrix to the randomly made adjacency matrix
-        SPD = g.dijkstra(start, end) #Runs the algorithm to find the shortest distance from the start node to end node
-        graph = storeDecision(choice, adjMatrix) #Stores the graph in a string so that it will print in the terminal
+        start = random.randint(0,6)         #Gernerates the starting number from 0-6
+        startNode = node[start]             #Stores the starting node based on the starting number
+        end = random.randint(0,6)           #Generates the end number from 0-6
+        while start == end:                 #Checks to make sure that the starting number isn't the same as the ending number
+            end = random.randint(0,6)       #Regenerates a random number from 0-6 to make sure the ending number is different
+        endNode = node[end]                 #Stores the ending node based on the end number
+        adjMatrix = createMatrix(choice)    #Makes the adhjacency matrix
+        g = Graph(7)                        #Makes a graph of 7 nodes
+        g.graph = adjMatrix                 #Sets the graph adjacency matrix to the randomly made adjacency matrix
+        SPD = g.dijkstra(start, end)               #Runs the algorithm to find the shortest distance from the start node to end node
+        graph = storeDecision(choice, adjMatrix)   #Stores the graph in a string so that it will print in the terminal
         return startNode, endNode, graph, str(SPD) #returns all the variables to send to the client
     if choice == 4:
         #Makes a matrix if the selection is the fourth graph
-        start = random.randint(0,5) #Gernerates the starting number from 0-5
-        startNode = node[start] #Stores the starting node based on the starting number
-        end = random.randint(0,5) #Generates the end number from 0-5
-        while start == end: #Checks to make sure that the starting number isn't the same as the ending number
-            end = random.randint(0,5) #Regenerates a random number from 0-5 to make sure the ending number is different
-        endNode = node[end] #Stores the ending node based on the end number
-        adjMatrix = createMatrix(choice) #Makes the adhjacency matrix
-        g = Graph(6) #Makes a graph of 6 nodes
-        g.graph = adjMatrix #Sets the graph adjacency matrix to the randomly made adjacency matrix
-        SPD = g.dijkstra(start, end) #Runs the algorithm to find the shortest distance from the start node to end node
-        graph = storeDecision(choice, adjMatrix) #Stores the graph in a string so that it will print in the terminal
-        return startNode, endNode, graph, str(SPD) #returns all the variables to send to the client
+        start = random.randint(0,5)         #Gernerates the starting number from 0-5
+        startNode = node[start]             #Stores the starting node based on the starting number
+        end = random.randint(0,5)           #Generates the end number from 0-5
+        while start == end:                 #Checks to make sure that the starting number isn't the same as the ending number
+            end = random.randint(0,5)       #Regenerates a random number from 0-5 to make sure the ending number is different
+        endNode = node[end]                 #Stores the ending node based on the end number
+        adjMatrix = createMatrix(choice)    #Makes the adhjacency matrix
+        g = Graph(6)                        #Makes a graph of 6 nodes
+        g.graph = adjMatrix                 #Sets the graph adjacency matrix to the randomly made adjacency matrix
+        SPD = g.dijkstra(start, end)                #Runs the algorithm to find the shortest distance from the start node to end node
+        graph = storeDecision(choice, adjMatrix)    #Stores the graph in a string so that it will print in the terminal
+        return startNode, endNode, graph, str(SPD)  #returns all the variables to send to the client
         
 #Takes in a choice and makes a adjacency matrix of distance between nodes
 def createMatrix(choice):
